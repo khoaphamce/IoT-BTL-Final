@@ -7,8 +7,7 @@ from  adafruit import create_client
 from rs485 import setDeviceON,setDeviceOFF,readMoisture,readTemperature
 import serial
 
-ADAFRUIT_IO_USERNAME = "khoaphamce"
-ADAFRUIT_IO_KEY = "aio_hHVv98lytxxgrfjwyQrYJwXM87oR"
+
     
 # Global scheduler and schedules
 scheduler = BackgroundScheduler()
