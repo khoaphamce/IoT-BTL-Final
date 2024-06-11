@@ -7,6 +7,8 @@ from  adafruit import create_client
 from rs485 import setDeviceON,setDeviceOFF,readMoisture,readTemperature
 import serial
 
+ADAFRUIT_IO_USERNAME = "khoaphamce"
+ADAFRUIT_IO_KEY = "aio_hHVv98lytxxgrfjwyQrYJwXM87oR"
     
 # Global scheduler and schedules
 scheduler = BackgroundScheduler()
@@ -50,6 +52,23 @@ def activate_relay(relay_id, duration):
     setDeviceOFF(relay_id)
 
 
+def selecter(relay_id,turn_off_relays,duration):
+    for relay in turn_off_relays: 
+        print(f'===== TURN OFF RELAY {relay} =====')
+        setDeviceOFF(relay)
+
+    print(f'===== TURN ON RELAY {relay_id} =====')
+    setDeviceON(relay_id)
+    
+    print(f'===== START PUMP OUT =====')
+    setDeviceON(8)
+    time.sleep(duration)
+    setDeviceOFF(8)
+    setDeviceOFF(relay_id)
+    print(f'===== FINISH PUMP OUT =====')
+
+
+
 def update_schedules(new_schedules,scheduler): #use when use input new scheduler
     """Remove all current jobs, clear schedules, and update with new schedules."""
     global schedules
@@ -91,16 +110,18 @@ def process_fsm(schedule):
     for i in range(1, 4):  # Fertilizer tanks 1 to 3
         relay_id = i
         flow_amount = schedule[f'flow {i}']
+
         print(f"Activating relay {relay_id} for {flow_amount}ml")
+
         # Can adding keep track the water level by activate one more sensor to read data
         activate_relay(relay_id, 10)  # Assuming 10s for simplicity, replace with actual flow sensor logic
 
     # # Water pump-in process
     print("Activating water pump-in")
     activate_relay(7, 10)  # 20s or until water is detected
-    
+    # Area selector 4 5 6
     print("Chosse Selector Area and pump-out")
-    activate_relay(8, 10)
+    selecter(4,[5,6],10)
     print('Stop Process')
     
 def add_schedule(schedule,scheduler):
