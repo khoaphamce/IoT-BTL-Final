@@ -7,18 +7,14 @@ from  adafruit import create_client
 from rs485 import setDeviceON,setDeviceOFF,readMoisture,readTemperature
 import serial
 
-
+ADAFRUIT_IO_USERNAME = "khoaphamce"
+ADAFRUIT_IO_KEY = "aio_hHVv98lytxxgrfjwyQrYJwXM87oR"
     
 # Global scheduler and schedules
 scheduler = BackgroundScheduler()
 schedules = []
 
-new_schedules = [ 
-    {'cycle': 3, 'flow 1': 20, 'flow 2': 10, 'flow 3': 20, 'isActive': True, 'schedulerName': 'New Lich Tuoi', 'startTime': '21:48', 'stopTime': '21:49'},
-    {'cycle': 5, 'flow 1': 20, 'flow 2': 10, 'flow 3': 20, 'isActive': True, 'schedulerName': 'New Lich Tuoi 1', 'startTime': '17:01', 'stopTime': '17:10'},
-    {'cycle': 1, 'flow 1': 20, 'flow 2': 10, 'flow 3': 20, 'isActive': False, 'schedulerName': 'New Lich Tuoi 2', 'startTime': '14:57', 'stopTime': '15:00'},
-    {'cycle': 3, 'flow 1': 20, 'flow 2': 10, 'flow 3': 20, 'isActive': True, 'schedulerName': 'New Lich Tuoi 3', 'startTime': '17:12', 'stopTime': '17:15'}
-]
+new_schedules = [ ]
 
 
 '''

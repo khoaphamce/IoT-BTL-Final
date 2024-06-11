@@ -1,5 +1,6 @@
 import time
 import serial
+from serial.tools import list_ports
 
 def addModbusCrc(msg):
     crc = 0xFFFF
